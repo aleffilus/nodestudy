@@ -1,21 +1,12 @@
-var express = require('express');
-var app = express();
-var msg = require('./mod_teste');
+var app = require('./config/server');
 
-app.set('view engine', 'ejs');
+var rotaNoticias = require('./app/routes/noticias')(app);
+var rotaHome = require('./app/routes/home');
+rotaHome(app);
 
-app.get("/", function(request, response){
-    response.render('home/index');
-});
-
-app.get("/formulario_inclusao_noticia", function(request, response){
-    response.render("admin/form_add_noticia");
-});
-
-app.get("/noticias", function(request, response){
-    response.render("noticias/noticias");
-});
+var rotaFormInclusaoNoticia = require('./app/routes/formulario_inclusao_noticia');
+rotaFormInclusaoNoticia(app);
 
 app.listen(3000, function(){
-    console.log(msg());
+    console.log("SERVIDOR RODANDO COM EXPRESS");
 }); 
