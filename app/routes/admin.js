@@ -7,10 +7,10 @@ module.exports = function(application) {
         var noticia = request.body;
 
         var conexao = application.config.db_connection();
-        var notificiasModel = application.app.models.noticiasModel; 
+        var noticiasDAO = new application.app.models.NoticiasDAO(conexao); 
 
-        notificiasModel.salvarNoticia(noticia, conexao, function(error, result){
+        noticiasDAO.salvarNoticia(noticia, function(error, result){
             response.redirect("/noticias");
         });  
     });
-};
+}; 
