@@ -5,12 +5,10 @@ module.exports = function(application) {
         var conexao = db_conexao();
     */
     application.get("/noticias", function(request, response){
-        var conexao = application.config.db_connection();
-        var noticiasDAO = new application.app.models.NoticiasDAO(conexao); 
+        application.app.controllers.noticiasController.noticias(application, request, response);
+    });
 
-        noticiasDAO.getNoticias(function(error, result){
-            response.render("noticias/noticias", { noticias: result });
-        });
-
+    application.get("/noticia", function(request, response){
+        application.app.controllers.noticiasController.noticia(application, request, response);
     });
 };
